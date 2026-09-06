@@ -27,8 +27,8 @@ app = Flask(
     static_url_path="/static"
 )
 
-# Use standard Gemini model name (gemini-2.5-flash or gemini-2.0-flash)
-DEFAULT_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+# Use standard Gemini model name (gemini-3.5-flash or gemini-2.0-flash)
+DEFAULT_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash-lite")
 
 _client = None
 
