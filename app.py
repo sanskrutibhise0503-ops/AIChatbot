@@ -10,9 +10,17 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-app = Flask(__name__)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-client = genai.Client(api_key=os.getenv("GEM_API_KEY"))
+app = Flask(
+    __name__,
+    template_folder=os.path.join(BASE_DIR, "templates"),
+    static_folder=os.path.join(BASE_DIR, "static"),
+    static_url_path="/static"
+)
+
+api_key = os.getenv("GEM_API_KEY") or os.getenv("GEMINI_API_KEY")
+client = genai.Client(api_key=api_key)
 
 chat = client.chats.create(
     model="gemini-3.5-flash-lite"
