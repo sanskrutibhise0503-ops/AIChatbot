@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Assistant</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+
+    <div class="sidebar" id="sidebar">
+
+        <h2>Nova AI</h2>
+
+        <button class="new-chat" onclick="newChat()">
+            + New Chat
+        </button>
+
+        <div class="history-title">
+            Chats
+        </div>
+
+        <div id="history">
+            <!-- Chat history appears here -->
+        </div>
+
+    </div>
+
+    <!-- Chat Area -->
+
+    <div class="chat">
+
+        <div class="header">
+            <button class="collapse-btn" id="collapseBtn" onclick="toggleSidebar()" title="Toggle Sidebar">
+                &#9776;
+            </button>
+            <span class="header-logo" id="headerLogo">Nova AI</span>
+             AI Assistant 
+        </div>
+
+        <div id="messages">
+
+            <!-- Hero section shown when no messages -->
+            <div class="hero-section" id="heroSection">
+                <div class="hero-icon">✨</div>
+                <h1 class="hero-title">What Can I Help<br>You Today?</h1>
+                <p class="hero-subtitle">Ask me anything — I'm here to chat, explain, and assist!</p>
+                <div class="hero-suggestions">
+                    <button class="suggestion-chip" onclick="fillSuggestion('Write me a poem 🌸')">Write me a poem 🌸</button>
+                    <button class="suggestion-chip" onclick="fillSuggestion('Explain a concept 💡')">Explain a concept 💡</button>
+                    <button class="suggestion-chip" onclick="fillSuggestion('Help me with code 💻')">Help me with code 💻</button>
+                    <button class="suggestion-chip" onclick="fillSuggestion('Give me a fun fact 🎉')">Give me a fun fact 🎉</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Hidden file input (triggered by popup) -->
+        <input type="file" id="imageInput" accept="image/*" style="display:none">
+
+        <!-- Attach popup -->
+        <div class="attach-popup" id="attachPopup">
+            <button class="attach-option" onclick="triggerImageUpload()">
+                <span class="attach-option-icon">🖼️</span>
+                <div>
+                    <div class="attach-option-title">Upload Image</div>
+                    <div class="attach-option-sub">JPG, PNG, GIF, WEBP</div>
+                </div>
+            </button>
+        </div>
+
+        <div class="bottom">
+            <!-- + attach button -->
+            <button class="attach-btn" id="attachBtn" onclick="toggleAttachPopup()" title="Attach file">
+                <span>+</span>
+            </button>
+
+            <!-- Selected file badge -->
+            <div class="file-badge" id="fileBadge" style="display:none">
+                <span id="fileBadgeName">📎 image</span>
+                <button class="file-badge-remove" onclick="removeFile()">✕</button>
+            </div>
+
+            <input id="message" placeholder="Ask something about the image or chat...">
+
+            <button class="send-btn" onclick="sendMessage()">Send</button>
+        </div>
+
+        
+
+    </div>
+
+</div>
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>
