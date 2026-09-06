@@ -36,9 +36,11 @@ def get_client():
     global _client
     if _client is None:
         api_key = os.getenv("GEM_API_KEY") or os.getenv("GEMINI_API_KEY")
+        if api_key:
+            api_key = api_key.strip().strip('"').strip("'")
         if not api_key:
             raise ValueError(
-                "Gemini API key is not configured. Please add GEM_API_KEY (or GEMINI_API_KEY) in your Vercel Project Settings -> Environment Variables."
+                "Gemini API key is not configured. Please add GEM_API_KEY (or GEMINI_API_KEY) in your Vercel Project Settings -> Environment Variables, then REDEPLOY the project."
             )
         _client = genai.Client(api_key=api_key)
     return _client
@@ -50,6 +52,18 @@ def home():
 @app.route("/c/<chat_id>")
 def chat_page(chat_id):
     return render_template("index.html")
+
+@app.route("/check-env")
+def check_env():
+    gem_key = os.getenv("GEM_API_KEY")
+    gemini_key = os.getenv("GEMINI_API_KEY")
+    active_key = gem_key or gemini_key
+    return jsonify({
+        "status": "configured" if bool(active_key) else "missing",
+        "GEM_API_KEY_found": bool(gem_key),
+        "GEMINI_API_KEY_found": bool(gemini_key),
+        "key_length": len(active_key) if active_key else 0
+    })
 
 @app.route("/chat", methods=["POST"])
 def chat_api():
