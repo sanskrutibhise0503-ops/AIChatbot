@@ -12,10 +12,10 @@ load_dotenv()
 
 app = Flask(__name__)
 
-# client = genai.Client(api_key=os.getenv("GEM_API_KEY"))
+client = genai.Client(api_key=os.getenv("GEM_API_KEY"))
 
 chat = client.chats.create(
-    model="gemini-3.6-flash"
+    model="gemini-3.5-flash-lite"
 )
 
 @app.route("/")
@@ -39,7 +39,7 @@ def chat_api():
             img = Image.open(image)
 
             response = client.models.generate_content(
-                model="gemini-3.6-flash",
+                model="gemini-3.5-flash-lite",
                 contents=[
                     message,
                     img

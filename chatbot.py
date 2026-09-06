@@ -12,7 +12,7 @@ client = genai.Client(api_key=os.getenv("GEM_API_KEY"))
 
 # Create a chat session
 chat = client.chats.create(
-    model="gemini-3.6-flash"
+    model="gemini-3.5-flash-lite"
 )
 
 print("Gemini Chatbot (type 'exit' to quit)\n")
